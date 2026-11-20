@@ -2,7 +2,7 @@
 [Normal operation] n=20, budget=300, risk limit=10
   Greedy        return   1433   time     0.000 ms
   DP            return   1451   time     0.060 ms
-  Backtracking  return   1451   time     9.000 ms   calls 1274044
+  Backtracking  return   1451   time    10.000 ms   calls 1274044
   DP matches backtracking: YES
 
 [Constraint shock] n=20, budget=150, risk limit=5
@@ -20,10 +20,20 @@
 [Largest backtrack] n=25, budget=300, risk limit=10
   Greedy        return   1471   time     0.000 ms
   DP            return   1504   time     0.080 ms
-  Backtracking  return   1504   time   130.000 ms   calls 18368957
+  Backtracking  return   1504   time   132.000 ms   calls 18368957
   DP matches backtracking: YES
 
 [Large stress case] n=1000, budget=2000, risk limit=10
-  Greedy        return  11726   time     0.280 ms
-  DP            return  11726   time    16.960 ms
+  Greedy        return  11726   time     0.300 ms
+  DP            return  11726   time    16.820 ms
   Backtracking  skipped (n > 25, it needs O(2^n) time)
+
+[Sorting comparison]
+  Random order           n=1000  merge sort     8687 comparisons | quick sort    12666 comparisons
+  Already sorted         n=1000  merge sort     5044 comparisons | quick sort   321795 comparisons
+
+[Ticker lookup] n=1000
+  S1       binary (iterative)   9 | binary (recursive)   9 | linear     1 comparisons
+  S500     binary (iterative)   8 | binary (recursive)   8 | linear   500 comparisons
+  S1000    binary (iterative)  10 | binary (recursive)  10 | linear  1000 comparisons
+  ZZZ      binary (iterative)  10 | binary (recursive)  10 | linear  1000 comparisons

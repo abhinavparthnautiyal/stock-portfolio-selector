@@ -71,13 +71,36 @@ static void show_window(void) {
         printf("  No profitable window in this price history\n");
 }
 
+static void find_stock(const Asset a[], const IndexEntry idx[], int n) {
+    char key[NAME_LEN];
+    int c1, c2, c3, ch;
+
+    printf("Ticker to find: ");
+    if (scanf("%19s", key) != 1) exit(0);
+    while ((ch = getchar()) != '\n' && ch != EOF);   /* throw away the rest of the line */
+
+    int p1 = binary_search_iter(idx, n, key, &c1);
+    int p2 = binary_search_rec(idx, n, key, &c2);
+    int p3 = linear_search(a, n, key, &c3);
+
+    if (p1 < 0)
+        printf("%s not found.\n", key);
+    else
+        printf("%s: cost %d, return %d, risk %d\n",
+               a[p1].name, a[p1].cost, a[p1].ret, a[p1].risk);
+    printf("Comparisons: binary (iterative) %d | binary (recursive) %d | linear %d\n", c1, c2, c3);
+    if (p1 != p2 || p1 != p3) printf("MISMATCH between the search methods!\n");
+}
+
 int main(void) {
     Asset assets[MAX_ASSETS];
+    IndexEntry idx[MAX_ASSETS];
     int budget = 50, max_risk = 10, choice, value;
 
     int n = load_assets("data/assets.txt", assets);
     if (n <= 0) return 1;
     merge_sort(assets, 0, n - 1);
+    build_index(assets, n, idx);
 
     do {
         printf("\n===== Stock Portfolio Selector =====\n");
@@ -89,6 +112,7 @@ int main(void) {
         printf("5. Compare all three\n");
         printf("6. Best holding window (price history)\n");
         printf("7. Change budget / risk limit\n");
+        printf("8. Find a stock by ticker (binary search)\n");
         printf("0. Exit\n");
 
         if (!read_int("Choose: ", &choice)) choice = -1;
@@ -112,14 +136,11 @@ int main(void) {
                 else
                     printf("Invalid risk limit, unchanged\n");
                 break;
+            case 8: find_stock(assets, idx, n); break;
             case 0: printf("Goodbye\n"); break;
             default: printf("Invalid choice\n");
         }
     } while (choice != 0);
-
-    printf("\n[Sorting comparison]\n");
-    compare_sorts("Random order", 1000, 0);
-    compare_sorts("Already sorted", 1000, 1);
 
     return 0;
 }

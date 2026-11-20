@@ -13,6 +13,11 @@ typedef struct {
     int  risk;    /* risk score from 1 (safe) to 10 (risky) */
 } Asset;
 
+typedef struct {
+    char name[NAME_LEN];
+    int  pos;     /* position of this stock in the assets array */
+} IndexEntry;
+
 int  load_assets(const char *filename, Asset a[]);
 void print_assets(const Asset a[], int n);
 
@@ -26,7 +31,12 @@ int  knapsack_dp(const Asset a[], int n, int budget, int max_risk, int chosen[])
 extern long bt_calls;   /* number of recursive calls made by backtracking */
 int backtrack(const Asset a[], int n, int budget, int max_risk, int chosen[]);
 
-extern long sort_cmps;   /* comparisons made by the sorts */
+extern long sort_cmps;
 void quick_sort(Asset a[], int lo, int hi);
+
+void build_index(const Asset a[], int n, IndexEntry idx[]);
+int  linear_search(const Asset a[], int n, const char *key, int *cmps);
+int  binary_search_iter(const IndexEntry idx[], int n, const char *key, int *cmps);
+int  binary_search_rec(const IndexEntry idx[], int n, const char *key, int *cmps);
 
 #endif

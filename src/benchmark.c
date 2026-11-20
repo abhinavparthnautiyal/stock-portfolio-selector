@@ -53,11 +53,54 @@ static void run_case(const char *label, int n, int budget, int max_risk) {
     }
 }
 
+static void compare_sorts(const char *label, int n, int mode) {
+    make_assets(n);   /* mode 0 = random order, 1 = already sorted (worst case for quick sort) */
+    if (mode == 1) merge_sort(base, 0, n - 1);
+
+    for (int i = 0; i < n; i++) work[i] = base[i];
+    sort_cmps = 0;
+    merge_sort(work, 0, n - 1);
+    long m = sort_cmps;
+
+    for (int i = 0; i < n; i++) work[i] = base[i];
+    sort_cmps = 0;
+    quick_sort(work, 0, n - 1);
+    long q = sort_cmps;
+
+    printf("  %-22s n=%-5d merge sort %8ld comparisons | quick sort %8ld comparisons\n",
+           label, n, m, q);
+}
+
+static void lookup_row(const Asset a[], const IndexEntry idx[], int n, const char *key) {
+    int c1, c2, c3;
+    binary_search_iter(idx, n, key, &c1);
+    binary_search_rec(idx, n, key, &c2);
+    linear_search(a, n, key, &c3);
+    printf("  %-8s binary (iterative) %3d | binary (recursive) %3d | linear %5d comparisons\n",
+           key, c1, c2, c3);
+}
+
+static void compare_lookups(int n) {
+    static IndexEntry idx[MAX_ASSETS];
+    make_assets(n);
+    build_index(base, n, idx);
+    printf("\n[Ticker lookup] n=%d\n", n);
+    lookup_row(base, idx, n, "S1");
+    lookup_row(base, idx, n, "S500");
+    lookup_row(base, idx, n, "S1000");
+    lookup_row(base, idx, n, "ZZZ");
+}
+
 int main(void) {
     run_case("Normal operation",   20, 300, 10);
     run_case("Constraint shock",   20, 150, 5);
     run_case("Small input",        10, 300, 10);
     run_case("Largest backtrack",  25, 300, 10);
     run_case("Large stress case", 1000, 2000, 10);
+
+    printf("\n[Sorting comparison]\n");
+    compare_sorts("Random order", 1000, 0);
+    compare_sorts("Already sorted", 1000, 1);
+    compare_lookups(1000);
     return 0;
 }
