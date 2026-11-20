@@ -32,3 +32,23 @@ void print_assets(const Asset a[], int n) {
                i + 1, a[i].name, a[i].cost, a[i].ret, a[i].risk);
     }
 }
+
+void print_selection(const Asset a[], int n, const int chosen[], const char *title) {
+    int cost = 0, ret = 0, risk_sum = 0, count = 0;
+
+    printf("\n%s\n", title);
+    for (int i = 0; i < n; i++) {
+        if (chosen[i]) {
+            printf("  %-10s cost %3d  return %3d  risk %d\n",
+                   a[i].name, a[i].cost, a[i].ret, a[i].risk);
+            cost += a[i].cost;
+            ret += a[i].ret;
+            risk_sum += a[i].risk;
+            count++;
+        }
+    }
+    printf("  Total cost: %d | Total return: %d", cost, ret);
+    if (count > 0)
+        printf(" | Average risk: %.2f", (double)risk_sum / count);
+    printf("\n");
+}

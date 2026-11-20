@@ -16,4 +16,7 @@ void print_assets(const Asset a[], int n);
 
 void merge_sort(Asset a[], int lo, int hi);
 
+int  greedy(const Asset a[], int n, int budget, int max_risk, int chosen[]);
+void print_selection(const Asset a[], int n, const int chosen[], const char *title);
+
 #endif
