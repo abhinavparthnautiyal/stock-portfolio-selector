@@ -1,0 +1,36 @@
+Normal cases
+  PASS  sorted by ratio
+  PASS  greedy, budget 50
+  PASS  DP, budget 50
+  PASS  backtracking, budget 50
+Boundary cases
+  PASS  budget 0 (DP)
+  PASS  budget below cheapest asset (greedy)
+  PASS  budget equals one asset cost (DP)
+  PASS  budget buys everything (greedy)
+  PASS  budget buys everything (DP)
+  PASS  risk limit 1, nothing allowed (DP)
+  PASS  risk limit 2, only WIPR (DP)
+  PASS  empty list (DP)
+  PASS  empty list (backtracking)
+  PASS  single asset fits (DP)
+  PASS  single asset too costly (DP)
+Invalid input
+Error: budget 2001 is above the limit of 2000
+  PASS  budget above limit (DP)
+Backtracking skipped: n = 26 is above 25
+  PASS  too many assets (backtracking)
+Error: cannot open tests/no_such_file.txt
+  PASS  missing file
+Skipping invalid row: NEG
+Skipping invalid row: BADRISK
+  PASS  file with 2 bad rows keeps 2 good rows
+Adversarial case (greedy fails, DP does not)
+  PASS  greedy takes the best ratio and gets 2
+  PASS  DP finds the better answer 190
+  PASS  backtracking agrees, 190
+Stress: 300 random inputs, DP vs backtracking
+  PASS  DP equals backtracking on every input
+  PASS  greedy never beats DP
+
+24 passed, 0 failed
