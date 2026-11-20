@@ -26,4 +26,7 @@ int  knapsack_dp(const Asset a[], int n, int budget, int max_risk, int chosen[])
 extern long bt_calls;   /* number of recursive calls made by backtracking */
 int backtrack(const Asset a[], int n, int budget, int max_risk, int chosen[]);
 
+extern long sort_cmps;   /* comparisons made by the sorts */
+void quick_sort(Asset a[], int lo, int hi);
+
 #endif

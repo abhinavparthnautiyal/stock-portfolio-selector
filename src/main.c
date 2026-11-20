@@ -117,5 +117,9 @@ int main(void) {
         }
     } while (choice != 0);
 
+    printf("\n[Sorting comparison]\n");
+    compare_sorts("Random order", 1000, 0);
+    compare_sorts("Already sorted", 1000, 1);
+
     return 0;
 }

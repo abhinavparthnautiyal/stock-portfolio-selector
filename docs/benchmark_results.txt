@@ -1,8 +1,8 @@
 
 [Normal operation] n=20, budget=300, risk limit=10
   Greedy        return   1433   time     0.000 ms
-  DP            return   1451   time     0.100 ms
-  Backtracking  return   1451   time    11.000 ms   calls 1274044
+  DP            return   1451   time     0.060 ms
+  Backtracking  return   1451   time     9.000 ms   calls 1274044
   DP matches backtracking: YES
 
 [Constraint shock] n=20, budget=150, risk limit=5
@@ -19,11 +19,11 @@
 
 [Largest backtrack] n=25, budget=300, risk limit=10
   Greedy        return   1471   time     0.000 ms
-  DP            return   1504   time     0.100 ms
-  Backtracking  return   1504   time   165.000 ms   calls 18368957
+  DP            return   1504   time     0.080 ms
+  Backtracking  return   1504   time   130.000 ms   calls 18368957
   DP matches backtracking: YES
 
 [Large stress case] n=1000, budget=2000, risk limit=10
-  Greedy        return  11726   time     0.360 ms
-  DP            return  11726   time    21.840 ms
+  Greedy        return  11726   time     0.280 ms
+  DP            return  11726   time    16.960 ms
   Backtracking  skipped (n > 25, it needs O(2^n) time)
