@@ -14,4 +14,6 @@ typedef struct {
 int  load_assets(const char *filename, Asset a[]);
 void print_assets(const Asset a[], int n);
 
+void merge_sort(Asset a[], int lo, int hi);
+
 #endif
