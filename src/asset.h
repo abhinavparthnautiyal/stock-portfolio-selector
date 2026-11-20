@@ -4,6 +4,8 @@
 #define MAX_ASSETS 1000
 #define NAME_LEN   20
 
+#define MAX_BUDGET  2000
+
 typedef struct {
     char name[NAME_LEN];
     int  cost;    /* price to buy, in thousands of rupees */
@@ -18,5 +20,10 @@ void merge_sort(Asset a[], int lo, int hi);
 
 int  greedy(const Asset a[], int n, int budget, int max_risk, int chosen[]);
 void print_selection(const Asset a[], int n, const int chosen[], const char *title);
+
+int  knapsack_dp(const Asset a[], int n, int budget, int max_risk, int chosen[]);
+
+extern long bt_calls;   /* number of recursive calls made by backtracking */
+int backtrack(const Asset a[], int n, int budget, int max_risk, int chosen[]);
 
 #endif
